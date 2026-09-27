@@ -1,0 +1,60 @@
+# Builds, checks and publishes the site with GitHub Pages.
+# One-time setup: Settings > Pages > Build and deployment > Source: GitHub Actions.
+# Custom domain: set it in Settings > Pages; the site's canonical URLs, sitemap and social
+# cards follow Pages' address automatically (or override with the WEBSITE_URL variable).
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - id: pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v5
+
+      # No npm install: the build is Node's standard library only. Generated assets
+      # (icons, social cards, WebP images) are committed; `npm run assets` remakes them.
+      - name: Build
+        env:
+          SITE_URL: ${{ vars.WEBSITE_URL || steps.pages.outputs.base_url || 'https://ark-devs.github.io/website' }}
+        run: node build.mjs
+
+      - name: Check pages, links and structured data
+        run: node tools/check.mjs
+
+      - if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
