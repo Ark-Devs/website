@@ -8,7 +8,7 @@ node serve.mjs            # preview on http://localhost:4173
 node tools/check.mjs      # one <h1>, unique titles/descriptions, valid JSON-LD, no broken links
 ```
 
-`SITE_URL=https://arkdevs.lk node build.mjs` builds for another origin: canonical URLs, the sitemap, social cards and robots.txt follow it, and a custom domain gets a `CNAME`. The default is `https://ark-devs.github.io/website`; in CI the build uses the address GitHub Pages reports, so a custom domain set in Settings → Pages is picked up automatically.
+`SITE_URL=https://arkdevs.lk node build.mjs` builds for another origin: canonical URLs, the sitemap, social cards and robots.txt follow it, and a custom domain gets a `CNAME`. The default is `https://arkdevs.xyz`; in CI the build uses the address GitHub Pages reports, so a custom domain set in Settings → Pages is picked up automatically.
 
 ## Brand
 

@@ -37,7 +37,7 @@ jobs:
       # (icons, social cards, WebP images) are committed; `npm run assets` remakes them.
       - name: Build
         env:
-          SITE_URL: ${{ vars.WEBSITE_URL || steps.pages.outputs.base_url || 'https://ark-devs.github.io/website' }}
+          SITE_URL: ${{ vars.WEBSITE_URL || steps.pages.outputs.base_url || 'https://arkdevs.xyz' }}
         run: node build.mjs
 
       - name: Check pages, links and structured data
