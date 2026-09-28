@@ -7,7 +7,8 @@ export const site = {
   alternateName: 'Ark Devs',
   // Absolute origin the site is served from. Canonical URLs, the sitemap and social
   // cards are built from it. Override at build time: SITE_URL=https://arkdevs.lk npm run build
-  url: (process.env.SITE_URL || 'https://arkdevs.xyz').replace(/\/+$/, ''),
+  // Always https: GitHub Pages reports http:// until its certificate is issued.
+  url: (process.env.SITE_URL || 'https://arkdevs.xyz').replace(/\/+$/, '').replace(/^http:\/\/(?!localhost)/, 'https://'),
   get domain() {
     return new URL(this.url).host;
   },
