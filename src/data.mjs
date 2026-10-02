@@ -18,7 +18,11 @@ export const site = {
   shortDescription: 'Custom software, apps and AI integrations from Colombo, Sri Lanka.',
   metaDescription:
     'arkdevs is a software development company in Colombo, Sri Lanka: custom ERP systems, web, mobile and desktop apps, database engineering and AI integration.',
-  email: process.env.SITE_EMAIL || 'muhammedhspam@gmail.com',
+  // Cloudflare Email Routing on arkdevs.xyz forwards each of these to the team inbox.
+  email: process.env.SITE_EMAIL || 'contact@arkdevs.xyz',
+  supportEmail: 'support@arkdevs.xyz',
+  issuesEmail: 'issues@arkdevs.xyz',
+  adminEmail: 'admin@arkdevs.xyz',
   phone: process.env.SITE_PHONE || '+94 76 090 3997',
   // Optional form backend (Formspree, Web3Forms, Getform…). Empty: the form opens the visitor's mail app.
   formEndpoint: process.env.SITE_FORM_ENDPOINT || '',

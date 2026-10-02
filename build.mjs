@@ -229,7 +229,7 @@ Motion: GSAP, ScrollTrigger, Lenis
 
 mkdirSync(join(out, '.well-known'), { recursive: true });
 const nextYear = new Date(Date.now() + 365 * 864e5).toISOString().replace(/\.\d+Z$/, 'Z');
-writeFileSync(join(out, '.well-known/security.txt'), `Contact: mailto:${site.email}\nExpires: ${nextYear}\nPreferred-Languages: en\nCanonical: ${site.url}/.well-known/security.txt\n`);
+writeFileSync(join(out, '.well-known/security.txt'), `Contact: mailto:${site.issuesEmail}\nExpires: ${nextYear}\nPreferred-Languages: en\nCanonical: ${site.url}/.well-known/security.txt\n`);
 
 // GitHub Pages: serve files as-is, and a custom domain if SITE_URL is not *.github.io.
 writeFileSync(join(out, '.nojekyll'), '');

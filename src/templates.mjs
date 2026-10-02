@@ -182,14 +182,17 @@ export function orgGraph() {
       priceRange: '$$',
       knowsAbout: site.keywords,
       sameAs: [site.github],
-      contactPoint: {
-        '@type': 'ContactPoint',
-        contactType: 'sales',
-        email: site.email,
-        telephone: site.phone.replace(/\s/g, ''),
-        availableLanguage: ['English', 'Tamil', 'Sinhala'],
-        areaServed: 'Worldwide',
-      },
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          contactType: 'sales',
+          email: site.email,
+          telephone: site.phone.replace(/\s/g, ''),
+          availableLanguage: ['English', 'Tamil', 'Sinhala'],
+          areaServed: 'Worldwide',
+        },
+        { '@type': 'ContactPoint', contactType: 'customer support', email: site.supportEmail, availableLanguage: ['English', 'Tamil', 'Sinhala'] },
+      ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Software development services',
@@ -809,6 +812,9 @@ ${pageHero(rel, { eyebrow: 'Contact', title: 'Start a<br><em>project.</em>', lea
         <h2 class="mono small">Email</h2><a class="h4 link-u" href="mailto:${site.email}">${site.email}</a>
       </div>
       <div class="contact-card" data-reveal>
+        <h2 class="mono small">Existing clients</h2><a class="link-u" href="mailto:${site.supportEmail}">${site.supportEmail}</a><p class="mono small dim">Bugs and security reports: <a class="link-u" href="mailto:${site.issuesEmail}">${site.issuesEmail}</a></p>
+      </div>
+      <div class="contact-card" data-reveal>
         <h2 class="mono small">Phone / WhatsApp</h2><a class="h4 link-u" href="tel:${site.phone.replace(/\s/g, '')}">${site.phone}</a>
       </div>
       <div class="contact-card" data-reveal>
@@ -839,7 +845,7 @@ ${pageHero(rel, { eyebrow: 'Legal', title: 'Privacy policy', lead: 'Short versio
 <h2 class="h4">Storage in your browser</h2>
 <p>The site stores one small session flag in your browser so the intro animation plays once per visit. It contains no personal information and is cleared when you close the tab.</p>
 <h2 class="h4">Your rights</h2>
-<p>You can ask us at any time to show, correct or delete what we hold about you by writing to <a class="link-u" href="mailto:${site.email}">${site.email}</a>.</p>
+<p>You can ask us at any time to show, correct or delete what we hold about you by writing to <a class="link-u" href="mailto:${site.adminEmail}">${site.adminEmail}</a>.</p>
 <p class="mono small dim">Last updated ${new Date().toISOString().slice(0, 10)}</p>
 </div></div></section>`;
   return { body, schema: [breadcrumbs(trail)] };
